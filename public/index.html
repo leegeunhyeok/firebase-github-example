@@ -11,7 +11,59 @@
       rel="icon"
       href="<%= htmlWebpackPlugin.options.BASE_URL %>favicon.ico"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css"
+    />
+    <link rel="icon" href="./index.css" />
     <title>Firebase & GitHub OAuth example</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: 'NanumBarunGothic', sans-serif;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+      }
+
+      button {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        color: #24292e;
+        background-color: #fff;
+        border: none;
+        border-radius: 3px;
+        box-shadow: 0 0 5px rgba(36, 41, 46, 0.2);
+        transition: 0.3s;
+      }
+
+      button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 3px 10px rgba(36, 41, 46, 0.2);
+      }
+
+      #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      #app > img {
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 1rem;
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -20,7 +72,10 @@
         enabled. Please enable it to continue.</strong
       >
     </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <div id="app">
+      <h2 id="content">Github OAuth</h2>
+      <img src="github.png" />
+      <button id="login">Login</button>
+    </div>
   </body>
 </html>
