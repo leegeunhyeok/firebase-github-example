@@ -20,6 +20,7 @@
     <title>Firebase & GitHub OAuth example</title>
     <style>
       * {
+        color: #24292e;
         box-sizing: border-box;
         font-family: 'NanumBarunGothic', sans-serif;
       }
@@ -33,35 +34,78 @@
         background-color: #fff;
       }
 
-      button {
+      .hoverable {
         cursor: pointer;
         padding: 0.5rem 1rem;
-        color: #24292e;
         background-color: #fff;
         border: none;
         border-radius: 3px;
         box-shadow: 0 0 5px rgba(36, 41, 46, 0.2);
         transition: 0.3s;
       }
-
-      button:hover {
+      .hoverable:hover {
         transform: translateY(-3px);
         box-shadow: 0 3px 10px rgba(36, 41, 46, 0.2);
       }
 
       #app {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
       }
 
-      #app > img {
+      #signin {
+        position: fixed;
         width: 100%;
         max-width: 200px;
+        margin: auto;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+      }
+      #signin > * {
+        display: inline-block;
+      }
+      #signin > img {
+        width: 100%;
+      }
+      #signin > button {
+        margin-top: 1rem;
+      }
+
+      #content {
+        width: 90%;
+        max-width: 500px;
+        margin: auto;
+        padding: 3rem 0;
+      }
+      #content > div {
+        width: 100%;
+        text-decoration: none;
+        margin-bottom: 2rem;
+      }
+      #content > div > a {
+        text-decoration: none;
+      }
+      #content > div h4 {
+        margin-top: 1rem;
+      }
+      #content > div span {
+        color: #ffb347;
+      }
+      #content > div p {
+        margin: 0;
         margin-bottom: 1rem;
+        color: #787878;
+      }
+
+      #logout {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        color: #fff;
+        background-color: tomato;
       }
     </style>
   </head>
@@ -73,9 +117,17 @@
       >
     </noscript>
     <div id="app">
-      <h2 id="content">Github OAuth</h2>
-      <img src="github.png" />
-      <button id="login">Login</button>
+      <div id="signin">
+        <h2>Github OAuth</h2>
+        <img src="github.png" />
+        <button id="login" class="hoverable">Login</button>
+      </div>
+      <div id="content" style="display: none">
+        <!-- Content -->
+      </div>
+      <button id="logout" class="hoverable" style="display: none">
+        Logout
+      </button>
     </div>
   </body>
 </html>
