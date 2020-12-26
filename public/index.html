@@ -107,6 +107,26 @@
         color: #fff;
         background-color: tomato;
       }
+
+      #loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        color: #24292e;
+      }
+      #loading::after {
+        content: 'Loading..';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -128,6 +148,7 @@
       <button id="logout" class="hoverable" style="display: none">
         Logout
       </button>
+      <div id="loading" style="display: none"></div>
     </div>
   </body>
 </html>

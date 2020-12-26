@@ -30,15 +30,15 @@ class App {
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('repo');
     this._provider = provider;
-    this._loadToken();
-    this._init();
+    this._loadToken().finally(() => this._init());
   }
 
   _init() {
     this._state.token &&
       this.getUser()
         .then((username) => this.getRepositoryList(username))
-        .then((repositoryList) => this.renderList(repositoryList));
+        .then((repositoryList) => this.renderList(repositoryList))
+        .finally(() => this.loading(false));
   }
 
   _saveToken(token) {
@@ -49,7 +49,12 @@ class App {
   _loadToken() {
     const token = localStorage.getItem('token');
     if (token) {
-      this._state.token = token;
+      this.loading(true);
+      return this.tokenValidation(token)
+        .then((validated) => validated && (this._state.token = token))
+        .catch(() => this._clearToken());
+    } else {
+      return Promise.reject();
     }
   }
 
@@ -59,6 +64,11 @@ class App {
 
   isAuthorized() {
     return !!this._state.token;
+  }
+
+  loading(show) {
+    document.getElementById('loading').style =
+      'display:' + (show ? 'block' : 'none');
   }
 
   login() {
@@ -78,6 +88,17 @@ class App {
   logout() {
     this._clearToken();
     this.showContent(false);
+  }
+
+  tokenValidation(token) {
+    return axios
+      .get('https://api.github.com', {
+        headers: {
+          accept: 'application/vnd.github.v3+json',
+          Authorization: `token ${token}`,
+        },
+      })
+      .then(({ status }) => status === 200);
   }
 
   getUser() {
